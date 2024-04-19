@@ -9,7 +9,7 @@ class Program
         using (var spannerSampleDbContext = new BloggingContext())
         {
             long total = 0;
-            long iterations = 100;
+            long iterations = 2;
             
             spannerSampleDbContext.Database.CanConnect();
             
@@ -17,7 +17,10 @@ class Program
             {
                 var timer = Stopwatch.StartNew();
                 timer.Start();
-                spannerSampleDbContext.Blogs.FromSqlRaw("SELECT 1");
+                var result = spannerSampleDbContext.Blogs
+                    .FromSqlRaw("SELECT 1 AS BlogId, 'dd' AS Url")
+                    .AsEnumerable()
+                    .FirstOrDefault();
                 timer.Stop();
                 total = total + timer.ElapsedMilliseconds;
             }
