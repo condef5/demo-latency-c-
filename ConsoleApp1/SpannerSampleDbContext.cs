@@ -1,5 +1,7 @@
 
+using System.ComponentModel.DataAnnotations.Schema;
 using Google.Cloud.EntityFrameworkCore.Spanner.Extensions;
+using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore;
 
 namespace ConsoleApp1;
@@ -14,17 +16,26 @@ public class BloggingContext : DbContext
     {
         string projectId = "kuroro-beasts";
         string instanceId = "adasdas";
-        string databaseId = "space";
+        string databaseId = "eleven";
         string connectionString =
             $"Data Source=projects/{projectId}/instances/{instanceId}/"
             + $"databases/{databaseId}";
       options.UseSpanner(connectionString);
     }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Blog>(entity =>
+        {
+            entity.HasKey(e => e.BlogId);
+        });
+    }
 }
 
 public class Blog
 {
-    public int BlogId { get; set; }
+    [Required]
+    public string BlogId { get; set; }
     public string Url { get; set; }
 
     public List<Post> Posts { get; } = new List<Post>();
@@ -32,10 +43,10 @@ public class Blog
 
 public class Post
 {
-    public int PostId { get; set; }
+    public string PostId { get; set; }
     public string Title { get; set; }
     public string Content { get; set; }
 
-    public int BlogId { get; set; }
+    public Guid BlogId { get; set; }
     public Blog Blog { get; set; }
 }

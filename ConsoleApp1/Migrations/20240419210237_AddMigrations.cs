@@ -1,10 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace ConsoleApp1.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class AddMigrations : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -12,7 +13,7 @@ namespace ConsoleApp1.Migrations
                 name: "Blogs",
                 columns: table => new
                 {
-                    BlogId = table.Column<int>(type: "INT64", nullable: false),
+                    BlogId = table.Column<string>(type: "STRING", nullable: false),
                     Url = table.Column<string>(type: "STRING", nullable: false)
                 },
                 constraints: table =>
@@ -24,17 +25,18 @@ namespace ConsoleApp1.Migrations
                 name: "Posts",
                 columns: table => new
                 {
-                    PostId = table.Column<int>(type: "INT64", nullable: false),
+                    PostId = table.Column<string>(type: "STRING", nullable: false),
                     Title = table.Column<string>(type: "STRING", nullable: false),
                     Content = table.Column<string>(type: "STRING", nullable: false),
-                    BlogId = table.Column<int>(type: "INT64", nullable: false)
+                    BlogId = table.Column<Guid>(type: "STRING(36)", nullable: false),
+                    BlogId1 = table.Column<string>(type: "STRING", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Posts", x => x.PostId);
                     table.ForeignKey(
-                        name: "FK_Posts_Blogs_BlogId",
-                        column: x => x.BlogId,
+                        name: "FK_Posts_Blogs_BlogId1",
+                        column: x => x.BlogId1,
                         principalTable: "Blogs",
                         principalColumn: "BlogId",
                         onDelete: ReferentialAction.Cascade);
