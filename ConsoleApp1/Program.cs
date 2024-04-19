@@ -10,13 +10,12 @@ class Program
         {
             long total = 0;
             long iterations = 100;
-            var timer = Stopwatch.StartNew();
             
             spannerSampleDbContext.Database.CanConnect();
             
             for (int i = 0; i < iterations; i++)
             {
-                
+                var timer = Stopwatch.StartNew();
                 timer.Start();
                 spannerSampleDbContext.Blogs.FromSqlRaw("SELECT 1");
                 timer.Stop();
