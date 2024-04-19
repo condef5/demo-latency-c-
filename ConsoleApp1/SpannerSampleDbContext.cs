@@ -13,8 +13,8 @@ public class BloggingContext : DbContext
     // Configures Entity Framework to use the specified Cloud Spanner database.
     {
         string projectId = "kuroro-beasts";
-        string instanceId = "testing";
-        string databaseId = "lucas";
+        string instanceId = "adasdas";
+        string databaseId = "space";
         string connectionString =
             $"Data Source=projects/{projectId}/instances/{instanceId}/"
             + $"databases/{databaseId}";
