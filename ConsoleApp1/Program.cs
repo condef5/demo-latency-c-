@@ -13,11 +13,16 @@ class Program
             
             spannerSampleDbContext.Database.CanConnect();
             
+            var result = spannerSampleDbContext.Blogs
+                .FromSqlRaw("SELECT 1 AS BlogId, 'dd' AS Url")
+                .AsEnumerable()
+                .FirstOrDefault();
+            
             for (int i = 0; i < iterations; i++)
             {
                 var timer = Stopwatch.StartNew();
                 timer.Start();
-                var result = spannerSampleDbContext.Blogs
+                result = spannerSampleDbContext.Blogs
                     .FromSqlRaw("SELECT 1 AS BlogId, 'dd' AS Url")
                     .AsEnumerable()
                     .FirstOrDefault();
