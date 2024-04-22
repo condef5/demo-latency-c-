@@ -38,7 +38,7 @@ class Program
             
             Console.WriteLine("------------------------------------------------");
 
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 100; i++)
             {
                 var timer = Stopwatch.StartNew();
                 timer.Start();
@@ -57,7 +57,7 @@ class Program
                 total = total + timer.ElapsedMilliseconds;
             }
             
-            Console.WriteLine($"Avg time for writing: {((double)total/10)} in milliseconds");
+            Console.WriteLine($"Avg time for writing: {((double)total/100)} in milliseconds");
         }
         
     }
