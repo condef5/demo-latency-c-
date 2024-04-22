@@ -11,7 +11,7 @@ public class BloggingContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        var connectionString = "Host=piratas-1116.jxf.cockroachlabs.cloud;Port=26257;Database=defaultdb;Username=frank;Password=WSwE3o0xSljko5Eb89YPEw;SslMode=VerifyFull";
+        var connectionString = "Host=pub-asia-east1.4b92a469-904b-4959-9fe5-803d281553fc.gcp.ybdb.io;Port=5433;Database=yugabyte;Username=admin;Password=NCKshEehIQwBdP5wyunzpIIKacGshu;SslMode=VerifyFull;TrustServerCertificate=true;RootCertificate=root.crt";
         optionsBuilder.UseNpgsql(connectionString);
     }
 
