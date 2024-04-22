@@ -14,7 +14,7 @@ public class BloggingContext : DbContext
     {
         NpgsqlConnectionStringBuilder urlBuilder = new NpgsqlConnectionStringBuilder();
             
-        urlBuilder.Host = "pub-europe-west1.4b92a469-904b-4959-9fe5-803d281553fc.gcp.ybdb.io";
+        urlBuilder.Host = "pub-asia-east1.4b92a469-904b-4959-9fe5-803d281553fc.gcp.ybdb.io";
         urlBuilder.Port = 5433;
         urlBuilder.Database = "yugabyte";
         urlBuilder.Username = "admin";
