@@ -14,11 +14,11 @@ public class BloggingContext : DbContext
     {
         NpgsqlConnectionStringBuilder urlBuilder = new NpgsqlConnectionStringBuilder();
             
-        urlBuilder.Host = "pub-asia-east1.4b92a469-904b-4959-9fe5-803d281553fc.gcp.ybdb.io";
+        urlBuilder.Host = "pub-us-west1.cd6db360-69b9-4c4b-96b8-b2e15bc9c615.gcp.ybdb.io";
         urlBuilder.Port = 5433;
         urlBuilder.Database = "yugabyte";
         urlBuilder.Username = "admin";
-        urlBuilder.Password = "NCKshEehIQwBdP5wyunzpIIKacGshu";
+        urlBuilder.Password = "7JmK5Et6pEclBJC-kaLqBwTPLHdSFu";
 
         // On every new connection the NpgSQL driver makes extra system table queries to map types, which adds overhead.
         // To turn off this behavior, set the following option in your connection string.
