@@ -1,6 +1,7 @@
 
 using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore;
+using Npgsql;
 
 namespace ConsoleApp1;
 
@@ -11,8 +12,19 @@ public class BloggingContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        var connectionString = "Host=pub-europe-west1.4b92a469-904b-4959-9fe5-803d281553fc.gcp.ybdb.io;Port=5433;Database=yugabyte;Username=admin;Timeout=1000;CommandTimeout=1000;Password=NCKshEehIQwBdP5wyunzpIIKacGshu";
-        optionsBuilder.UseNpgsql(connectionString);
+        NpgsqlConnectionStringBuilder urlBuilder = new NpgsqlConnectionStringBuilder();
+            
+        urlBuilder.Host = "pub-europe-west1.4b92a469-904b-4959-9fe5-803d281553fc.gcp.ybdb.io";
+        urlBuilder.Port = 5433;
+        urlBuilder.Database = "yugabyte";
+        urlBuilder.Username = "admin";
+        urlBuilder.Password = "NCKshEehIQwBdP5wyunzpIIKacGshu";
+
+        // On every new connection the NpgSQL driver makes extra system table queries to map types, which adds overhead.
+        // To turn off this behavior, set the following option in your connection string.
+        urlBuilder.ServerCompatibilityMode = ServerCompatibilityMode.NoTypeLoading;
+
+        optionsBuilder.UseNpgsql(urlBuilder.ConnectionString);
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
