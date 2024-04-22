@@ -11,7 +11,7 @@ public class BloggingContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        var connectionString = "Host=localhost;Database=delta;Username=postgres";
+        var connectionString = "Host=piratas-1116.jxf.cockroachlabs.cloud;Port=26257;Database=defaultdb;Username=frank;Password=WSwE3o0xSljko5Eb89YPEw;SslMode=VerifyFull";
         optionsBuilder.UseNpgsql(connectionString);
     }
 
