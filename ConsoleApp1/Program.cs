@@ -9,7 +9,7 @@ class Program
         using (var spannerSampleDbContext = new BloggingContext())
         {
             long total = 0;
-            long iterations = 10;
+            long iterations = 100;
             
             spannerSampleDbContext.Database.CanConnect();
             
