@@ -9,9 +9,11 @@ class Program
         using (var spannerSampleDbContext = new BloggingContext())
         {
             long total = 0;
-            long iterations = 10;
+            long iterations = 3;
             
-            spannerSampleDbContext.Database.CanConnect();
+            var isConnected = spannerSampleDbContext.Database.CanConnect();
+            
+            Console.WriteLine("Database connected: " + isConnected);
             
             var result = spannerSampleDbContext.Blogs
                 .FromSqlRaw("SELECT 'my-id' AS BlogId, 'dd' AS Url")
@@ -31,33 +33,6 @@ class Program
             }
         
             Console.WriteLine($"Avg time for reading: {((double)total/iterations)} in milliseconds");
-            
-            Console.WriteLine("------------------------------------------------");
-            
-            total = 0;
-            
-            Console.WriteLine("------------------------------------------------");
-
-            for (int i = 0; i < 10; i++)
-            {
-                var timer = Stopwatch.StartNew();
-                timer.Start();
-
-                var newBlog = new Blog
-                {
-                    BlogId = Guid.NewGuid().ToString(),
-                    Url = "https://example.com/blog" + i
-                };
-
-                spannerSampleDbContext.Blogs.Add(newBlog);
-                spannerSampleDbContext.SaveChanges();
-                
-                timer.Stop();
-                
-                total = total + timer.ElapsedMilliseconds;
-            }
-            
-            Console.WriteLine($"Avg time for writing: {((double)total/10)} in milliseconds");
         }
         
     }

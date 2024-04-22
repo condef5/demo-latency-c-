@@ -11,7 +11,7 @@ public class BloggingContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        var connectionString = "Host=pub-us-west1.4b92a469-904b-4959-9fe5-803d281553fc.gcp.ybdb.io;Port=5433;Database=yugabyte;Username=admin;Password=NCKshEehIQwBdP5wyunzpIIKacGshu;SslMode=Require";
+        var connectionString = "Host=pub-europe-west1.4b92a469-904b-4959-9fe5-803d281553fc.gcp.ybdb.io;Port=5433;Database=yugabyte;Username=admin;Timeout=1000;CommandTimeout=1000;Password=NCKshEehIQwBdP5wyunzpIIKacGshu";
         optionsBuilder.UseNpgsql(connectionString);
     }
 
