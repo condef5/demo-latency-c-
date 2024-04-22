@@ -1,5 +1,4 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using ConsoleApp1;
 using Microsoft.EntityFrameworkCore;
 
@@ -24,7 +23,7 @@ class Program
                 var timer = Stopwatch.StartNew();
                 timer.Start();
                 result = spannerSampleDbContext.Blogs
-                    .FromSqlRaw("SELECT 1 AS BlogId, 'dd' AS Url")
+                    .FromSqlRaw("SELECT '1' AS BlogId, 'dd' AS Url")
                     .AsEnumerable()
                     .FirstOrDefault();
                 timer.Stop();

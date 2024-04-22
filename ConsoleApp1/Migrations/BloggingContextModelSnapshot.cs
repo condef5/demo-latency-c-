@@ -4,6 +4,7 @@ using ConsoleApp1;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
@@ -15,16 +16,20 @@ namespace ConsoleApp1.Migrations
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "6.0.21");
+            modelBuilder
+                .HasAnnotation("ProductVersion", "8.0.4")
+                .HasAnnotation("Relational:MaxIdentifierLength", 63);
+
+            NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
             modelBuilder.Entity("ConsoleApp1.Blog", b =>
                 {
                     b.Property<string>("BlogId")
-                        .HasColumnType("STRING");
+                        .HasColumnType("text");
 
                     b.Property<string>("Url")
                         .IsRequired()
-                        .HasColumnType("STRING");
+                        .HasColumnType("text");
 
                     b.HasKey("BlogId");
 
@@ -34,24 +39,26 @@ namespace ConsoleApp1.Migrations
             modelBuilder.Entity("ConsoleApp1.Post", b =>
                 {
                     b.Property<string>("PostId")
-                        .HasColumnType("STRING");
+                        .HasColumnType("text");
 
                     b.Property<Guid>("BlogId")
-                        .HasColumnType("STRING(36)");
+                        .HasColumnType("uuid");
 
                     b.Property<string>("BlogId1")
                         .IsRequired()
-                        .HasColumnType("STRING");
+                        .HasColumnType("text");
 
                     b.Property<string>("Content")
                         .IsRequired()
-                        .HasColumnType("STRING");
+                        .HasColumnType("text");
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("STRING");
+                        .HasColumnType("text");
 
                     b.HasKey("PostId");
+
+                    b.HasIndex("BlogId1");
 
                     b.ToTable("Posts");
                 });

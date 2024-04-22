@@ -1,6 +1,4 @@
 
-using System.ComponentModel.DataAnnotations.Schema;
-using Google.Cloud.EntityFrameworkCore.Spanner.Extensions;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,16 +9,10 @@ public class BloggingContext : DbContext
     public DbSet<Blog> Blogs { get; set; }
     public DbSet<Post> Posts { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder options)
-    // Configures Entity Framework to use the specified Cloud Spanner database.
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        string projectId = "kuroro-beasts";
-        string instanceId = "adasdas";
-        string databaseId = "eleven";
-        string connectionString =
-            $"Data Source=projects/{projectId}/instances/{instanceId}/"
-            + $"databases/{databaseId}";
-      options.UseSpanner(connectionString);
+        var connectionString = "Host=localhost;Database=delta;Username=postgres";
+        optionsBuilder.UseNpgsql(connectionString);
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
